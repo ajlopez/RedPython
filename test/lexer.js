@@ -127,3 +127,18 @@ exports['get colons as punctuation'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 };
 
+exports['get equal as operator'] = function (test) {
+    var lxr = lexer.createLexer('=');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Operator);
+    test.equal(token.value, '=');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
