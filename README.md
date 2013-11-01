@@ -1,6 +1,6 @@
 # RedPython
 
-Simple beams (lightweight message streams for Node.js)
+Compiles Python to C, using JavaScript.
 
 ## Installation
 
