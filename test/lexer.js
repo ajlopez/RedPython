@@ -2,6 +2,12 @@
 var lexer = require('../lib/lexer.js');
 TokenType = lexer.TokenType;
 
+exports['get null if empty string'] = function (test) {
+    var lxr = lexer.createLexer('');
+    
+    test.strictEqual(lxr.nextToken(), null);
+}
+
 exports['get indent and name'] = function (test) {
     var lxr = lexer.createLexer('name');
     
