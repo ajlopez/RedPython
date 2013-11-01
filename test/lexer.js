@@ -73,3 +73,24 @@ exports['get indent two spaces and name skipping empty lines'] = function (test)
     
     test.strictEqual(lxr.nextToken(), null);
 };
+
+exports['get parenthesis as punctuation'] = function (test) {
+    var lxr = lexer.createLexer('()');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Punctuation);
+    test.equal(token.value, '(');
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Punctuation);
+    test.equal(token.value, ')');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
