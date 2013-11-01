@@ -26,6 +26,22 @@ exports['get null if empty lines with carriage return'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 }
 
+exports['get indent and integer'] = function (test) {
+    var lxr = lexer.createLexer('123');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Integer);
+    test.equal(token.value, '123');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
 exports['get indent and name'] = function (test) {
     var lxr = lexer.createLexer('name');
     
@@ -110,3 +126,4 @@ exports['get colons as punctuation'] = function (test) {
     
     test.strictEqual(lxr.nextToken(), null);
 };
+
