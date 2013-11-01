@@ -12,9 +12,16 @@ exports['compile integer'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
-exports['get indent with size zero'] = function (test) {
+exports['get indent with zero size'] = function (test) {
     var parsr = parser.createParser('name');
     var indent = parsr.parseIndent();
     
     test.strictEqual(indent, 0);
+};
+
+exports['get indent with size equals two'] = function (test) {
+    var parsr = parser.createParser('  name');
+    var indent = parsr.parseIndent();
+    
+    test.strictEqual(indent, 2);
 };
