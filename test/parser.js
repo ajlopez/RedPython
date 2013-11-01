@@ -37,12 +37,22 @@ exports['get indent with size equals two'] = function (test) {
     test.strictEqual(indent, 2);
 };
 
-exports['get simple expression command'] = function (test) {
+exports['compile simple expression command'] = function (test) {
     var parsr = parser.createParser('123');
     var command = parsr.parseCommand();
     
     test.ok(command);
     test.equal(command.compile(), '123;');
+    
+    test.strictEqual(parsr.parseCommand(), null);
+};
+
+exports['compile simple assignment command'] = function  (test) {
+    var parsr = parser.createParser('a=123');
+    var command = parsr.parseCommand();
+    
+    test.ok(command);
+    test.equal(command.compile(), 'a = 123;');
     
     test.strictEqual(parsr.parseCommand(), null);
 };
