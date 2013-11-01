@@ -8,6 +8,12 @@ exports['get null if empty string'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 }
 
+exports['get null if blank string'] = function (test) {
+    var lxr = lexer.createLexer('    ');
+    
+    test.strictEqual(lxr.nextToken(), null);
+}
+
 exports['get indent and name'] = function (test) {
     var lxr = lexer.createLexer('name');
     
