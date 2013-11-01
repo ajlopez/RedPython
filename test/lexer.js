@@ -14,6 +14,18 @@ exports['get null if blank string'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 }
 
+exports['get null if empty lines'] = function (test) {
+    var lxr = lexer.createLexer('  \n   \n');
+    
+    test.strictEqual(lxr.nextToken(), null);
+}
+
+exports['get null if empty lines with carriage return'] = function (test) {
+    var lxr = lexer.createLexer('  \r\n   \n');
+    
+    test.strictEqual(lxr.nextToken(), null);
+}
+
 exports['get indent and name'] = function (test) {
     var lxr = lexer.createLexer('name');
     
@@ -21,6 +33,38 @@ exports['get indent and name'] = function (test) {
     test.ok(token);
     test.equal(token.type, TokenType.Indent);
     test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Name);
+    test.equal(token.value, 'name');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
+exports['get indent two spaces and name'] = function (test) {
+    var lxr = lexer.createLexer('  name');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 2);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Name);
+    test.equal(token.value, 'name');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
+exports['get indent two spaces and name skipping empty lines'] = function (test) {
+    var lxr = lexer.createLexer('    \r\n\n  name');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 2);
     
     token = lxr.nextToken();
     test.ok(token);
