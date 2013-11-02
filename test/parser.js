@@ -109,3 +109,22 @@ exports['compile simple return command'] = function (test) {
     
     test.strictEqual(parsr.parseCommand(), null);
 };
+
+exports['compile simple if command'] = function (test) {
+    var parsr = parser.createParser('if a:\n  b = 1');
+    var command = parsr.parseCommand();
+    
+    test.ok(command);
+    
+    var result = command.compile();
+    
+    test.ok(result);
+    test.ok(Array.isArray(result));
+    test.equal(result.length, 2);
+    test.equal(result[0], 'if (a)');
+    test.ok(Array.isArray(result[1]));
+    test.equal(result[1].length, 1);
+    test.equal(result[1][0], 'b = 1;');
+    
+    test.strictEqual(parsr.parseCommand(), null);
+};
