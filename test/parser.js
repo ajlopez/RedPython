@@ -128,24 +128,3 @@ exports['compile simple if command'] = function (test) {
     
     test.strictEqual(parsr.parseCommand(), null);
 };
-
-exports['compile assignment to text'] = function (test) {
-    var text = parser.compile('a = 1');
-    
-    test.ok(text);
-    test.equal(text, "int a;\r\na = 1;\r\n");
-};
-
-exports['compile simple if to text'] = function (test) {
-    var text = parser.compile('if b:\n  a = 1');
-    
-    test.ok(text);
-    test.equal(text, "int a;\r\nif (b)\r\n    a = 1;\r\n");
-};
-
-exports['compile if to text'] = function (test) {
-    var text = parser.compile('if b:\n  a = 1\n  c = 2');
-    
-    test.ok(text);
-    test.equal(text, "int a;\r\nint c;\r\nif (b)\r\n{\r\n    a = 1;\r\n    c = 2;\r\n}\r\n");
-};
