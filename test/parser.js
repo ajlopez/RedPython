@@ -135,3 +135,10 @@ exports['compile assignment to text'] = function (test) {
     test.ok(text);
     test.equal(text, "int a;\r\na = 1;\r\n");
 };
+
+exports['compile simple if to text'] = function (test) {
+    var text = parser.compile('if b:\n  a = 1');
+    
+    test.ok(text);
+    test.equal(text, "int a;\r\nif (b)\r\n    a = 1;\r\n");
+};
