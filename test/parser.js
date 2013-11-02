@@ -45,6 +45,17 @@ exports['compile arithmetic expression'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
+exports['compile arithmetic expression with parens'] = function (test) {
+    var parsr = parser.createParser('123+(a-1)*2/3');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.compile(), '123 + (a - 1) * 2 / 3');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};
+
 exports['get indent with zero size'] = function (test) {
     var parsr = parser.createParser('name');
     var indent = parsr.parseIndent();
