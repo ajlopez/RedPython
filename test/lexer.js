@@ -58,6 +58,27 @@ exports['get indent and name'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 };
 
+exports['get indent and two names'] = function (test) {
+    var lxr = lexer.createLexer('foo bar');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Name);
+    test.equal(token.value, 'foo');
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Name);
+    test.equal(token.value, 'bar');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
 exports['get indent two spaces and name'] = function (test) {
     var lxr = lexer.createLexer('  name');
     
