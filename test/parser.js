@@ -57,3 +57,13 @@ exports['compile simple assignment command'] = function  (test) {
     test.strictEqual(parsr.parseCommand(), null);
 };
 
+exports['compile simple program with assignment'] = function (test) {
+    var parsr = parser.createParser('a=123');
+    var program = parsr.parseProgram();
+    test.ok(program);
+    test.ok(Array.isArray(program));
+    test.equal(program.length, 2);
+    test.equal(program[0], 'int a;');
+    test.equal(program[1], 'a = 123;');
+};
+
