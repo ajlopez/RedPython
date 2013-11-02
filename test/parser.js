@@ -23,6 +23,17 @@ exports['compile name'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
+exports['compile sum'] = function (test) {
+    var parsr = parser.createParser('123+a');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.compile(), '123 + a');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};
+
 exports['get indent with zero size'] = function (test) {
     var parsr = parser.createParser('name');
     var indent = parsr.parseIndent();
