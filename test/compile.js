@@ -30,8 +30,16 @@ exports['compile simple def'] = function (test) {
 };
 
 exports['compile main with call'] = function (test) {
-    var text = redpython.compile('def main():\r\n  puts("Hello, world")\r\n');
+    var text = redpython.compile('\r\ndef main():\r\n  puts("Hello, world")\r\n\r\n');
     
     test.ok(text);
     test.equal(text, 'int main()\r\n{\r\n    puts("Hello, world");\r\n}\r\n');
 };
+
+exports['compile function with local variable'] = function (test) {
+    var text = redpython.compile('\r\ndef one():\r\n  a = 1\r\n\  return a\n');
+    
+    test.ok(text);
+    test.equal(text, 'int one()\r\n{\r\n    int a;\r\n    a = 1;\r\n    return a;\r\n}\r\n');
+};
+
