@@ -22,6 +22,20 @@ exports['compile if to text'] = function (test) {
     test.equal(text, "int a;\r\nint c;\r\nif (b)\r\n{\r\n    a = 1;\r\n    c = 2;\r\n}\r\n");
 };
 
+exports['compile simple while to text'] = function (test) {
+    var text = redpython.compile('while b:\n  a = 1');
+    
+    test.ok(text);
+    test.equal(text, "int a;\r\nwhile (b)\r\n    a = 1;\r\n");
+};
+
+exports['compile whileto text'] = function (test) {
+    var text = redpython.compile('while b:\n  a = 1\n  c = 2');
+    
+    test.ok(text);
+    test.equal(text, "int a;\r\nint c;\r\nwhile (b)\r\n{\r\n    a = 1;\r\n    c = 2;\r\n}\r\n");
+};
+
 exports['compile simple def'] = function (test) {
     var text = redpython.compile('def one():\n  return 1');
     
