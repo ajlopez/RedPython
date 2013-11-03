@@ -195,3 +195,19 @@ exports['get plus as operator'] = function (test) {
     
     test.strictEqual(lxr.nextToken(), null);
 };
+
+exports['get comparison operators'] = function (test) {
+    var operators = ['==', '!=', '<', '<=', '>', '>='];
+    var lxr = lexer.createLexer(operators.join(' '));
+    
+    lxr.nextToken();
+    
+    for (var k = 0; k < operators.length; k++) {
+        var token = lxr.nextToken();
+        test.ok(token);
+        test.equal(token.type, TokenType.Operator);
+        test.equal(token.value, operators[k]);
+    }
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
