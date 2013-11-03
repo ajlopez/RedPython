@@ -67,6 +67,27 @@ exports['compile arithmetic expression with parens'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
+exports['compile simple call expression'] = function (test) {
+    var parsr = parser.createParser('put("Hello, world")');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.compile(), 'put("Hello, world")');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};
+
+exports['compile simple call expression with two arguments'] = function (test) {
+    var parsr = parser.createParser('add(1,2)');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.compile(), 'add(1, 2)');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};
 exports['get indent with zero size'] = function (test) {
     var parsr = parser.createParser('name');
     var indent = parsr.parseIndent();
