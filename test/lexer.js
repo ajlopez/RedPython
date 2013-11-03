@@ -95,6 +95,22 @@ exports['get indent two spaces and name'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 };
 
+exports['get string'] = function (test) {
+    var lxr = lexer.createLexer('"foo"');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.String);
+    test.equal(token.value, 'foo');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
 exports['get indent two spaces and name skipping empty lines'] = function (test) {
     var lxr = lexer.createLexer('    \r\n\n  name');
     
