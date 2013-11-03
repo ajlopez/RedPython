@@ -160,3 +160,18 @@ exports['compile simple if command'] = function (test) {
     
     test.strictEqual(parsr.parseCommand(), null);
 };
+
+exports['compile call with two arguments'] = function (test) {
+    var parsr = parser.createParser('add(1, 2)');
+    parsr.parseIndent();    
+    var expr = parsr.parseExpression();
+    
+    test.ok(expr);
+    
+    var result = expr.compile();
+    
+    test.ok(result);
+    test.equal(result, 'add(1, 2)');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};

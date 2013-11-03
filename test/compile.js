@@ -51,9 +51,16 @@ exports['compile main with call'] = function (test) {
 };
 
 exports['compile function with local variable'] = function (test) {
-    var text = redpython.compile('\r\ndef one():\r\n  a = 1\r\n\  return a\n');
+    var text = redpython.compile('\r\ndef one():\r\n  a = 1\r\n  return a\n');
     
     test.ok(text);
     test.equal(text, 'int one()\r\n{\r\n    int a;\r\n    a = 1;\r\n    return a;\r\n}\r\n');
+};
+
+exports['compile function with argument'] = function (test) {
+    var text = redpython.compile('\r\ndef incr(a):\r\n  return a + 1\r\n');
+    
+    test.ok(text);
+    test.equal(text, 'int incr(int a)\r\n{\r\n    return a + 1;\r\n}\r\n');
 };
 

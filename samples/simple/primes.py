@@ -4,9 +4,10 @@ def isprime(n):
     
     while k * k <= n:
         if n % k == 0:
-            return
+            return 0
+        k = k + 2
             
-    printf("%d is prime", n)
+    printf("%d is prime\n", n)
     
     
 def main():
