@@ -29,3 +29,9 @@ exports['compile simple def'] = function (test) {
     test.equal(text, "int one()\r\n{\r\n    return 1;\r\n}\r\n");
 };
 
+exports['compile main with call'] = function (test) {
+    var text = redpython.compile('def main():\r\n  puts("Hello, world")\r\n');
+    
+    test.ok(text);
+    test.equal(text, 'int main()\r\n{\r\n    puts("Hello, world");\r\n}\r\n');
+};
