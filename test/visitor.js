@@ -39,7 +39,6 @@ exports['visit constant expression using visit generic'] = function (test) {
     test.equal(count, 1);
 };
 
-
 exports['visit string expression'] = function (test) {
     var count = 0;
     
@@ -70,6 +69,44 @@ exports['visit string expression using visit generic'] = function (test) {
         visitGeneric: function (node) {
             test.ok(node);
             test.equal(node.getValue(), 'foo');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
+
+exports['visit name expression'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('bar');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitNameExpression: function (node) {
+            test.ok(node);
+            test.equal(node.getName(), 'bar');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
+
+exports['visit name expression using visit generic'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('spam');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitGeneric: function (node) {
+            test.ok(node);
+            test.equal(node.getName(), 'spam');
             count++;
         }
     }
