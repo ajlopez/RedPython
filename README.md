@@ -41,9 +41,9 @@ TBD
 
 MIT
 
-## Inception
+## References
 
-Inspired by https://github.com/darach/beam-js
+- [Using printf in Python](http://my.safaribooksonline.com/book/programming/python/0596007973/python-shortcuts/pythoncook2-chp-4-sect-20)
 
 ## Contribution
 
