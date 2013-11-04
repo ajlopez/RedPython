@@ -176,3 +176,23 @@ exports['visit if command'] = function (test) {
     test.equal(count, 1);
 };
 
+exports['visit while command'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('while b:\r\n  a = 1');
+    var cmd = parsr.parseCommand();
+    
+    var visitor = {
+        visitWhileCommand: function (node) {
+            test.ok(node);
+            test.equal(node.getExpression().compile(), 'b');
+            test.equal(node.getCommand().compile(), 'a = 1;');
+            count++;
+        }
+    }
+    
+    cmd.visit(visitor);
+    test.equal(count, 1);
+};
+
+
