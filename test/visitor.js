@@ -156,3 +156,23 @@ exports['visit binary expression using visit generic'] = function (test) {
     expr.visit(visitor);
     test.equal(count, 1);
 };
+
+exports['visit if command'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('if b:\r\n  a = 1');
+    var cmd = parsr.parseCommand();
+    
+    var visitor = {
+        visitIfCommand: function (node) {
+            test.ok(node);
+            test.equal(node.getExpression().compile(), 'b');
+            test.equal(node.getCommand().compile(), 'a = 1;');
+            count++;
+        }
+    }
+    
+    cmd.visit(visitor);
+    test.equal(count, 1);
+};
+
