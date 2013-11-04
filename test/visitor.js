@@ -38,3 +38,42 @@ exports['visit constant expression using visit generic'] = function (test) {
     expr.visit(visitor);
     test.equal(count, 1);
 };
+
+
+exports['visit string expression'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('"foo"');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitStringExpression: function (node) {
+            test.ok(node);
+            test.equal(node.getValue(), 'foo');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
+
+exports['visit string expression using visit generic'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('"foo"');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitGeneric: function (node) {
+            test.ok(node);
+            test.equal(node.getValue(), 'foo');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
