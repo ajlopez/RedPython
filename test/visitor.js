@@ -114,3 +114,45 @@ exports['visit name expression using visit generic'] = function (test) {
     expr.visit(visitor);
     test.equal(count, 1);
 };
+
+exports['visit binary expression'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('1+a');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitBinaryExpression: function (node) {
+            test.ok(node);
+            test.equal(node.getLeftExpression().compile(), '1');
+            test.equal(node.getRightExpression().compile(), 'a');
+            test.equal(node.getOperator(), '+');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
+
+exports['visit binary expression using visit generic'] = function (test) {
+    var count = 0;
+    
+    var parsr = parser.createParser('1+a');
+    parsr.parseIndent();
+    var expr = parsr.parseExpression();
+    
+    var visitor = {
+        visitGeneric: function (node) {
+            test.ok(node);
+            test.equal(node.getLeftExpression().compile(), '1');
+            test.equal(node.getRightExpression().compile(), 'a');
+            test.equal(node.getOperator(), '+');
+            count++;
+        }
+    }
+    
+    expr.visit(visitor);
+    test.equal(count, 1);
+};
