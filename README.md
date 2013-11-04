@@ -44,12 +44,13 @@ MIT
 ## References
 
 - [Using printf in Python](http://my.safaribooksonline.com/book/programming/python/0596007973/python-shortcuts/pythoncook2-chp-4-sect-20)
+- [PyPy - The RPython Toolchain](http://doc.pypy.org/en/latest/translation.html)
 
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/RedPython) and submit
 [pull requests](https://github.com/ajlopez/RedPython/pulls) — contributions are
-welcome<
+welcome
 
 If you submit a pull request, please be sure to add or update corresponding
 test cases, and ensure that `npm test` continues to pass.
