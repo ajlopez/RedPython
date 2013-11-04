@@ -64,3 +64,16 @@ exports['compile function with argument'] = function (test) {
     test.equal(text, '\r\nint incr(int a)\r\n{\r\n    return a + 1;\r\n}\r\n');
 };
 
+exports['compile break'] = function (test) {
+    var text = redpython.compile('break');
+    
+    test.ok(text);
+    test.equal(text, 'break;\r\n');
+};
+
+exports['compile continue'] = function (test) {
+    var text = redpython.compile('continue');
+    
+    test.ok(text);
+    test.equal(text, 'continue;\r\n');
+};
