@@ -45,6 +45,7 @@ MIT
 
 - [Using printf in Python](http://my.safaribooksonline.com/book/programming/python/0596007973/python-shortcuts/pythoncook2-chp-4-sect-20)
 - [PyPy - The RPython Toolchain](http://doc.pypy.org/en/latest/translation.html)
+- [Arduino Language Reference](http://arduino.cc/en/Reference/HomePage)
 
 ## Contribution
 
