@@ -12,6 +12,15 @@ exports['compile integer'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
+exports['compile integer expression to have int as type'] = function (test) {
+    var parsr = parser.createParser('123');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.getType(), 'int');
+};
+
 exports['compile string'] = function (test) {
     var parsr = parser.createParser('"foo"');
     parsr.parseIndent();
