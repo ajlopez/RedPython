@@ -1,11 +1,18 @@
 
 var redpython = require('..');
 
-exports['compile assignment to text'] = function (test) {
+exports['compile integer assignment to text'] = function (test) {
     var text = redpython.compile('a = 1');
     
     test.ok(text);
     test.equal(text, "int a;\r\na = 1;\r\n");
+};
+
+exports['compile real assignment to text'] = function (test) {
+    var text = redpython.compile('a = 3.14');
+    
+    test.ok(text);
+    test.equal(text, "double a;\r\na = 3.14;\r\n");
 };
 
 exports['compile simple if to text'] = function (test) {
