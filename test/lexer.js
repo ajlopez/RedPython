@@ -42,6 +42,22 @@ exports['get indent and integer'] = function (test) {
     test.strictEqual(lxr.nextToken(), null);
 };
 
+exports['get indent and real'] = function (test) {
+    var lxr = lexer.createLexer('123.45');
+    
+    var token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Indent);
+    test.equal(token.value, 0);
+    
+    token = lxr.nextToken();
+    test.ok(token);
+    test.equal(token.type, TokenType.Real);
+    test.equal(token.value, '123.45');
+    
+    test.strictEqual(lxr.nextToken(), null);
+};
+
 exports['get indent and name'] = function (test) {
     var lxr = lexer.createLexer('name');
     
