@@ -32,6 +32,15 @@ exports['compile string'] = function (test) {
     test.strictEqual(parsr.parseExpression(), null);
 };
 
+exports['compile string to have string as type'] = function (test) {
+    var parsr = parser.createParser('"foo"');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.getType(), 'string');
+};
+
 exports['compile name'] = function (test) {
     var parsr = parser.createParser('name');
     parsr.parseIndent();
