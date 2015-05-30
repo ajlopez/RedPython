@@ -41,6 +41,17 @@ exports['compile string to have string as type'] = function (test) {
     test.equal(expr.getType(), 'string');
 };
 
+exports['compile real'] = function (test) {
+    var parsr = parser.createParser('3.14159');
+    parsr.parseIndent();
+    
+    var expr = parsr.parseExpression();
+    test.ok(expr);
+    test.equal(expr.compile(), '3.14159');
+    
+    test.strictEqual(parsr.parseExpression(), null);
+};
+
 exports['compile name'] = function (test) {
     var parsr = parser.createParser('name');
     parsr.parseIndent();
