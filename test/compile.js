@@ -15,6 +15,13 @@ exports['compile real assignment to text'] = function (test) {
     test.equal(text, "double a;\r\na = 3.14;\r\n");
 };
 
+exports['compile string assignment to text'] = function (test) {
+    var text = redpython.compile('a = "foo"');
+    
+    test.ok(text);
+    test.equal(text, 'char *a;\r\na = "foo";\r\n');
+};
+
 exports['compile simple if to text'] = function (test) {
     var text = redpython.compile('if b:\n  a = 1');
     
